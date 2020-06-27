@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./PaletteCard.css";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 class PaletteCard extends Component {
   render() {
@@ -10,7 +11,9 @@ class PaletteCard extends Component {
           <div className="palette-content">
             <span>{name}</span>
           </div>
-          <button className="copy-button">Copy</button>
+          <CopyToClipboard text={background}>
+            <button className="copy-button">Copy</button>
+          </CopyToClipboard>
         </div>
         <span className="see-more">More</span>
       </div>
