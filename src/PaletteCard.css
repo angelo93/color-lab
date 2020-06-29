@@ -7,7 +7,16 @@
   margin-bottom: -4px;
 }
 
-.copy-button {
+.SingleColorPalette .PaletteCard {
+  height: 50%;
+}
+
+.PaletteCard.go-back {
+  background-color: black;
+}
+
+.copy-button,
+.back-button {
   width: 100px;
   height: 30px;
   position: absolute;
@@ -24,7 +33,15 @@
   color: aliceblue;
   text-transform: uppercase;
   border: none;
+  text-decoration: none;
+}
+
+.copy-button {
   opacity: 0;
+}
+
+.go-back a {
+  cursor: pointer;
 }
 
 .PaletteCard:hover .copy-button {
