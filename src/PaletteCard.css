@@ -1,8 +1,10 @@
 .PaletteCard {
   width: 20%;
   height: 25%;
+  display: inline-block;
   margin: 0 auto;
   position: relative;
+  margin-bottom: -4px;
 }
 
 .copy-button {
