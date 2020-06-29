@@ -17,7 +17,7 @@ class PaletteCard extends Component {
   }
 
   render() {
-    const { name, background, colorId, paletteId } = this.props;
+    const { name, background, colorId, paletteId, showLink } = this.props;
     const { copied } = this.state;
 
     return (
@@ -38,12 +38,14 @@ class PaletteCard extends Component {
             <button className="copy-button">Copy</button>
           </CopyToClipboard>
         </div>
-        <Link
-          to={`/palette/${paletteId}/${colorId}`}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <span className="see-more">More</span>
-        </Link>
+        {showLink && (
+          <Link
+            to={`/palette/${paletteId}/${colorId}`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <span className="see-more">More</span>
+          </Link>
+        )}
       </div>
     );
   }
