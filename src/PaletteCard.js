@@ -2,7 +2,68 @@ import React, { Component } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Link } from "react-router-dom";
 import chroma from "chroma-js";
+import { withStyles } from "@material-ui/styles";
+
 import "./PaletteCard.css";
+
+const styles = {
+  PaletteCard: {
+    width: "20%",
+    height: (props) => (props.showMultiColorPalette ? "25%" : "50%"),
+    display: "inline-block",
+    margin: "0 auto",
+    position: "relative",
+    marginBottom: "-4px",
+    "&:hover button": {
+      opacity: "1",
+    },
+  },
+  copyText: {
+    color: (props) =>
+      chroma(props.background).luminance() >= 0.7 ? "black" : "white",
+  },
+  colorName: {
+    color: (props) =>
+      chroma(props.background).luminance() <= 0.8 ? "white" : "black",
+  },
+  seeMore: {
+    color: (props) =>
+      chroma(props.background).luminance() >= 0.7 ? "rgba(0,0,0,0.6)" : "white",
+    background: "rgba(255, 255, 255, 0.3)",
+    position: "absolute",
+    border: "none",
+    right: "0px",
+    bottom: "0px",
+    width: "60px",
+    height: "30px",
+    textAlign: "center",
+    lineHeight: "30px",
+    textTransform: "uppercase",
+    cursor: "pointer",
+  },
+  copyButton: {
+    color: (props) =>
+      chroma(props.background).luminance() >= 0.7 ? "rgba(0,0,0,0.6)" : "white",
+    width: "100px",
+    height: "30px",
+    position: "absolute",
+    display: "inline-block",
+    top: "50%",
+    left: "50%",
+    marginLeft: "-50px",
+    marginTop: "-15px",
+    textAlign: "center",
+    outline: "none",
+    background: "rgba(255, 255, 255, 0.3)",
+    fontSize: "1rem",
+    lineHeight: "30px",
+    textTransform: "uppercase",
+    border: "none",
+    textDecoration: "none",
+    cursor: "pointer",
+    opacity: "0",
+  },
+};
 
 class PaletteCard extends Component {
   constructor(props) {
@@ -18,40 +79,40 @@ class PaletteCard extends Component {
   }
 
   render() {
-    const { name, background, colorId, paletteId, showLink } = this.props;
+    const {
+      name,
+      background,
+      colorId,
+      paletteId,
+      showMultiColorPalette,
+      classes,
+    } = this.props;
     const { copied } = this.state;
 
-    const isDarkColor = chroma(background).luminance() <= 0.08;
-    const isLightColor = chroma(background).luminance() >= 0.65;
-
     return (
-      <div style={{ background }} className="PaletteCard">
+      <div style={{ background }} className={classes.PaletteCard}>
         <div
           style={{ background }}
           className={`copy-overlay ${copied && "show"}`}
         />
         <div className={`copy-msg ${copied && "show"}`}>
           <h1>copied!</h1>
-          <p className={isLightColor && "dark-text"}>{this.props.background}</p>
+          <p className={classes.copyText}>{this.props.background}</p>
         </div>
         <div className="copy-container">
           <div className="palette-content">
-            <span className={isDarkColor && "light-text"}>{name}</span>
+            <span className={classes.colorName}>{name}</span>
           </div>
           <CopyToClipboard text={background} onCopy={this.changeCopyState}>
-            <button className={`copy-button ${isLightColor && "dark-text"}`}>
-              Copy
-            </button>
+            <button className={classes.copyButton}>Copy</button>
           </CopyToClipboard>
         </div>
-        {showLink && (
+        {showMultiColorPalette && (
           <Link
             to={`/palette/${paletteId}/${colorId}`}
             onClick={(e) => e.stopPropagation()}
           >
-            <span className={`see-more ${isLightColor && "dark-text"}`}>
-              MORE
-            </span>
+            <span className={classes.seeMore}>MORE</span>
           </Link>
         )}
       </div>
@@ -59,4 +120,4 @@ class PaletteCard extends Component {
   }
 }
 
-export default PaletteCard;
+export default withStyles(styles)(PaletteCard);
