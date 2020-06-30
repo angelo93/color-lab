@@ -17,7 +17,11 @@ export default {
     display: "flex",
     width: "100%",
     justifyContent: "space-between",
-    color: "white",
+    color: "whitesmoke",
+    alignItems: "center",
+    "& a": {
+      color: "whitesmoke",
+    },
   },
   palettes: {
     boxSizing: "border-box",
