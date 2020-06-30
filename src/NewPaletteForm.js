@@ -149,6 +149,12 @@ class NewPaletteForm extends Component {
     this.props.history.push("/");
   }
 
+  removeSwatch(swatchName) {
+    this.setState({
+      colors: this.state.colors.filter((color) => color.name !== swatchName),
+    });
+  }
+
   render() {
     const { classes } = this.props;
     const { open } = this.state;
@@ -247,7 +253,12 @@ class NewPaletteForm extends Component {
         >
           <div className={classes.drawerHeader} />
           {this.state.colors.map((color) => (
-            <DraggablePaletteSwatch color={color.color} name={color.name} />
+            <DraggablePaletteSwatch
+              key={color.name}
+              color={color.color}
+              name={color.name}
+              handleClick={() => this.removeSwatch(color.name)}
+            />
           ))}
         </main>
       </div>

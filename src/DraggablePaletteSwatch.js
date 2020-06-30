@@ -35,12 +35,12 @@ const styles = {
 };
 
 function DraggablePaletteSwatch(props) {
-  const { classes, name, color } = props;
+  const { classes, name, color, handleClick } = props;
   return (
     <div className={classes.root} style={{ backgroundColor: color }}>
       <div className={classes.swatchContent}>
         <span>{name}</span>
-        <DeleteIcon className={classes.deleteIcon} />
+        <DeleteIcon className={classes.deleteIcon} onClick={handleClick} />
       </div>
     </div>
   );
