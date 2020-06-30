@@ -12,6 +12,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Button from "@material-ui/core/Button";
 import DraggablePaletteSwatch from "./DraggablePaletteSwatch";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { ChromePicker } from "react-color";
 
 const drawerWidth = 400;
@@ -80,14 +81,26 @@ class NewPaletteForm extends Component {
     this.state = {
       open: true,
       currentSwatch: "teal",
-      colors: ["purple", "#e15764"],
+      newName: "",
+      colors: [],
     };
     this.updateCurrentSwatch = this.updateCurrentSwatch.bind(this);
     this.addNewSwatch = this.addNewSwatch.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
-  state = {
-    open: false,
-  };
+
+  componentDidMount() {
+    ValidatorForm.addValidationRule("isSwatchNameUnique", (value) => {
+      return this.state.colors.every(
+        ({ name }) => name.toLowerCase() !== value.toLowerCase()
+      );
+    });
+    ValidatorForm.addValidationRule("isSwatchUnique", (value) => {
+      return this.state.colors.every(
+        ({ color }) => color !== this.state.currentSwatch
+      );
+    });
+  }
 
   handleDrawerOpen = () => {
     this.setState({ open: true });
@@ -102,7 +115,15 @@ class NewPaletteForm extends Component {
   }
 
   addNewSwatch() {
-    this.setState({ colors: [...this.state.colors, this.state.currentSwatch] });
+    const newSwatch = {
+      color: this.state.currentSwatch,
+      name: this.state.newName,
+    };
+    this.setState({ colors: [...this.state.colors, newSwatch], newName: "" });
+  }
+
+  handleChange(evt) {
+    this.setState({ newName: evt.target.value });
   }
 
   render() {
@@ -160,14 +181,26 @@ class NewPaletteForm extends Component {
             color={this.state.currentSwatch}
             onChangeComplete={this.updateCurrentSwatch}
           />
-          <Button
-            variant="contained"
-            color="primary"
-            style={{ backgroundColor: this.state.currentSwatch }}
-            onClick={this.addNewSwatch}
-          >
-            Add Swatch
-          </Button>
+          <ValidatorForm onSubmit={this.addNewSwatch}>
+            <TextValidator
+              value={this.state.newName}
+              onChange={this.handleChange}
+              validators={["required", "isSwatchNameUnique", "isSwatchUnique"]}
+              errorMessages={[
+                "Enter a name!",
+                "Name already exists!",
+                "Swatch already used!",
+              ]}
+            />
+            <Button
+              variant="contained"
+              type="submit"
+              color="primary"
+              style={{ backgroundColor: this.state.currentSwatch }}
+            >
+              Add Swatch
+            </Button>
+          </ValidatorForm>
         </Drawer>
         <main
           className={classNames(classes.content, {
@@ -176,7 +209,7 @@ class NewPaletteForm extends Component {
         >
           <div className={classes.drawerHeader} />
           {this.state.colors.map((color) => (
-            <DraggablePaletteSwatch color={color} />
+            <DraggablePaletteSwatch color={color.color} name={color.name} />
           ))}
         </main>
       </div>
