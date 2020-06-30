@@ -11,11 +11,11 @@
   height: 50%;
 } */
 
-.PaletteCard.go-back {
+/* .PaletteCard.go-back {
   background-color: black;
-}
+} */
 
-.copy-button,
+/* .copy-button,
 .back-button {
   width: 100px;
   height: 30px;
@@ -34,15 +34,15 @@
   text-transform: uppercase;
   border: none;
   text-decoration: none;
-}
+} */
 
 /* .copy-button {
   opacity: 0;
 } */
 
-.go-back a {
+/* .go-back a {
   cursor: pointer;
-}
+} */
 
 /* .PaletteCard:hover .copy-button {
   opacity: 1;
