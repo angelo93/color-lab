@@ -73,6 +73,16 @@ const styles = (theme) => ({
 });
 
 class NewPaletteForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: true,
+      currentSwatch: "teal",
+      colors: ["purple", "#e15764"],
+    };
+    this.updateCurrentSwatch = this.updateCurrentSwatch.bind(this);
+    this.addNewSwatch = this.addNewSwatch.bind(this);
+  }
   state = {
     open: false,
   };
@@ -84,6 +94,14 @@ class NewPaletteForm extends Component {
   handleDrawerClose = () => {
     this.setState({ open: false });
   };
+
+  updateCurrentSwatch(newSwatch) {
+    this.setState({ currentSwatch: newSwatch.hex });
+  }
+
+  addNewSwatch() {
+    this.setState({ colors: [...this.state.colors, this.state.currentSwatch] });
+  }
 
   render() {
     const { classes } = this.props;
@@ -137,10 +155,15 @@ class NewPaletteForm extends Component {
             </Button>
           </div>
           <ChromePicker
-            color="blue"
-            onChangeComplete={(newColor) => console.log(newColor)}
+            color={this.state.currentSwatch}
+            onChangeComplete={this.updateCurrentSwatch}
           />
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ backgroundColor: this.state.currentSwatch }}
+            onClick={this.addNewSwatch}
+          >
             Add Swatch
           </Button>
         </Drawer>
@@ -150,6 +173,11 @@ class NewPaletteForm extends Component {
           })}
         >
           <div className={classes.drawerHeader} />
+          <ul>
+            {this.state.colors.map((color) => (
+              <li style={{ backgroundColor: color }}>{color}</li>
+            ))}
+          </ul>
         </main>
       </div>
     );
