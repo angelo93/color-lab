@@ -1,3 +1,4 @@
+// Main Vendors
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/styles";
@@ -7,7 +8,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Slider from "rc-slider";
-
+// Styles
 import styles from "./styles/NavbarStyles";
 import "rc-slider/assets/index.css";
 
@@ -30,7 +31,7 @@ class Navbar extends Component {
 
   render() {
     const { level, changeLevel, showSlider, classes } = this.props;
-    const { format } = this.state;
+    const { format, open } = this.state;
     return (
       <header className={classes.Navbar}>
         <div className={classes.logo}>
@@ -59,7 +60,7 @@ class Navbar extends Component {
         </div>
         <Snackbar
           anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-          open={this.state.open}
+          open={open}
           autoHideDuration={3000}
           message={
             <span id="msg-id">Format Changed To: {format.toUpperCase()}</span>

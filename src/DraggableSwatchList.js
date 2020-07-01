@@ -1,6 +1,8 @@
+// Main Vendors
 import React from "react";
-import DraggablePaletteSwatch from "./DraggablePaletteSwatch";
 import { SortableContainer } from "react-sortable-hoc";
+// Components
+import DraggablePaletteSwatch from "./DraggablePaletteSwatch";
 
 const DraggableSwatchList = SortableContainer(({ colors, removeSwatch }) => {
   return (

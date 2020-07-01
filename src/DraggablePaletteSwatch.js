@@ -1,8 +1,9 @@
+// Main Vendors
 import React from "react";
 import { SortableElement } from "react-sortable-hoc";
 import { withStyles } from "@material-ui/styles";
 import DeleteIcon from "@material-ui/icons/Delete";
-
+// Styles
 import styles from "./styles/DraggablePaletteSwatchStyles";
 
 const DraggablePaletteSwatch = SortableElement((props) => {

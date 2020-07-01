@@ -1,9 +1,12 @@
+// Main Vendors
 import React, { Component } from "react";
+import { withStyles } from "@material-ui/styles";
+// Components
 import PalletCard from "./PaletteCard";
 import Navbar from "./Navbar";
 import PaletteFooter from "./PaletteFooter";
+// Styles
 import styles from "./styles/PaletteStyles";
-import { withStyles } from "@material-ui/styles";
 
 class Palette extends Component {
   constructor(props) {
