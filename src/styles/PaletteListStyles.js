@@ -5,6 +5,7 @@ export default {
     display: "flex",
     alignItems: "flex-start",
     justifyContent: "center",
+    overflow: "hidden scroll",
   },
   container: {
     width: "50%",
