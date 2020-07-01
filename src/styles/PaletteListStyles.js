@@ -6,6 +6,7 @@ export default {
     alignItems: "flex-start",
     justifyContent: "center",
     overflow: "hidden scroll",
+    scrollbarWidth: "none",
   },
   container: {
     width: "50%",

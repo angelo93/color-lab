@@ -15,7 +15,8 @@ export default {
     height: "100vh",
     display: "flex",
     flexDirection: "column",
-    overflow: "hidden",
+    overflow: "hidden scroll",
+    scrollbarWidth: "none",
   },
   paletteColors: {
     height: "90%",
