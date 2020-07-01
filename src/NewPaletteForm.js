@@ -155,6 +155,7 @@ class NewPaletteForm extends Component {
             removeSwatch={this.removeSwatch}
             axis="xy"
             onSortEnd={this.onSortEnd}
+            distance={20}
           />
         </main>
       </div>
