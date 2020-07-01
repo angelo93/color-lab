@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import PaletteFormNav from "./PaletteFormNav";
+import SwatchPickerForm from "./SwatchPickerForm";
 import Drawer from "@material-ui/core/Drawer";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
@@ -9,8 +10,6 @@ import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Button from "@material-ui/core/Button";
 import DraggableSwatchList from "./DraggableSwatchList";
-import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-import { ChromePicker } from "react-color";
 import { arrayMove } from "react-sortable-hoc";
 
 const drawerWidth = 400;
@@ -82,30 +81,14 @@ class NewPaletteForm extends Component {
     super(props);
     this.state = {
       open: true,
-      currentSwatch: "teal",
-      newSwatchName: "",
       colors: this.props.palettes[0].colors,
     };
-    this.updateCurrentSwatch = this.updateCurrentSwatch.bind(this);
     this.addNewSwatch = this.addNewSwatch.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.removeSwatch = this.removeSwatch.bind(this);
     this.clearSwatches = this.clearSwatches.bind(this);
     this.addRandomSwatch = this.addRandomSwatch.bind(this);
-  }
-
-  componentDidMount() {
-    ValidatorForm.addValidationRule("isSwatchNameUnique", (value) => {
-      return this.state.colors.every(
-        ({ name }) => name.toLowerCase() !== value.toLowerCase()
-      );
-    });
-    ValidatorForm.addValidationRule("isSwatchUnique", (value) => {
-      return this.state.colors.every(
-        ({ color }) => color !== this.state.currentSwatch
-      );
-    });
   }
 
   handleDrawerOpen = () => {
@@ -116,15 +99,7 @@ class NewPaletteForm extends Component {
     this.setState({ open: false });
   };
 
-  updateCurrentSwatch(newSwatch) {
-    this.setState({ currentSwatch: newSwatch.hex });
-  }
-
-  addNewSwatch() {
-    const newSwatch = {
-      color: this.state.currentSwatch,
-      name: this.state.newSwatchName,
-    };
+  addNewSwatch(newSwatch) {
     this.setState({
       colors: [...this.state.colors, newSwatch],
       newSwatchName: "",
@@ -218,36 +193,11 @@ class NewPaletteForm extends Component {
               Random Swatch
             </Button>
           </div>
-          <ChromePicker
-            color={this.state.currentSwatch}
-            onChangeComplete={this.updateCurrentSwatch}
+          <SwatchPickerForm
+            paletteIsFull={paletteIsFull}
+            addNewSwatch={this.addNewSwatch}
+            colors={colors}
           />
-          <ValidatorForm onSubmit={this.addNewSwatch}>
-            <TextValidator
-              value={this.state.newSwatchName}
-              name="newSwatchName"
-              onChange={this.handleChange}
-              validators={["required", "isSwatchNameUnique", "isSwatchUnique"]}
-              errorMessages={[
-                "Enter a name!",
-                "Name already exists!",
-                "Swatch already used!",
-              ]}
-            />
-            <Button
-              variant="contained"
-              type="submit"
-              color="primary"
-              disabled={paletteIsFull}
-              style={{
-                backgroundColor: paletteIsFull
-                  ? "grey"
-                  : this.state.currentSwatch,
-              }}
-            >
-              {paletteIsFull ? "Palette Full" : "Add Swatch"}
-            </Button>
-          </ValidatorForm>
         </Drawer>
         <main
           className={classNames(classes.content, {
