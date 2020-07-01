@@ -77,8 +77,17 @@ class NewPaletteForm extends Component {
 
   addRandomSwatch() {
     const allSwatches = this.props.palettes.map((p) => p.colors).flat();
-    var rand = Math.floor(Math.random() * allSwatches.length);
-    const randomSwatch = allSwatches[rand];
+    let rand;
+    let randomSwatch;
+    let isDuplicateSwatch = true;
+
+    while (isDuplicateSwatch) {
+      rand = Math.floor(Math.random() * allSwatches.length);
+      randomSwatch = allSwatches[rand];
+      isDuplicateSwatch = this.state.colors.some(
+        (color) => color.name === randomSwatch.name // eslint-disable-line no-loop-func
+      );
+    }
 
     this.setState({ colors: [...this.state.colors, randomSwatch] });
   }
