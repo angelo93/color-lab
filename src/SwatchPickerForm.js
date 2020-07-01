@@ -2,6 +2,24 @@ import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { ChromePicker } from "react-color";
+import { withStyles } from "@material-ui/core/styles";
+
+const styles = {
+  picker: {
+    width: "100% !important",
+    marginTop: "2rem",
+  },
+  addSwatch: {
+    width: "100%",
+    padding: "1rem",
+    marginTop: "1rem",
+    fontSize: "2rem",
+  },
+  swatchNameInput: {
+    width: "100%",
+    height: "70px",
+  },
+};
 
 class SwatchPickerForm extends Component {
   constructor(props) {
@@ -50,7 +68,7 @@ class SwatchPickerForm extends Component {
   }
 
   render() {
-    const { paletteIsFull } = this.props;
+    const { paletteIsFull, classes } = this.props;
     const { currentSwatch, newSwatchName } = this.state;
 
     return (
@@ -58,11 +76,16 @@ class SwatchPickerForm extends Component {
         <ChromePicker
           color={currentSwatch}
           onChangeComplete={this.updateCurrentSwatch}
+          className={classes.picker}
         />
         <ValidatorForm onSubmit={this.handleSubmit}>
           <TextValidator
+            className={classes.swatchNameInput}
+            placeholder="Swatch Name"
             value={newSwatchName}
             name="newSwatchName"
+            variant="filled"
+            margin="normal"
             onChange={this.handleChange}
             validators={["required", "isSwatchNameUnique", "isSwatchUnique"]}
             errorMessages={[
@@ -76,6 +99,7 @@ class SwatchPickerForm extends Component {
             type="submit"
             color="primary"
             disabled={paletteIsFull}
+            className={classes.addSwatch}
             style={{
               backgroundColor: paletteIsFull ? "grey" : currentSwatch,
             }}
@@ -88,4 +112,4 @@ class SwatchPickerForm extends Component {
   }
 }
 
-export default SwatchPickerForm;
+export default withStyles(styles)(SwatchPickerForm);
