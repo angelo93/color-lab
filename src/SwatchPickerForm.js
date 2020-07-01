@@ -63,7 +63,11 @@ class SwatchPickerForm extends Component {
           onChangeComplete={this.updateCurrentSwatch}
           className={classes.picker}
         />
-        <ValidatorForm onSubmit={this.handleSubmit}>
+        <ValidatorForm
+          onSubmit={this.handleSubmit}
+          ref="form"
+          instantValidate={false}
+        >
           <TextValidator
             className={classes.swatchNameInput}
             placeholder="Swatch Name"
