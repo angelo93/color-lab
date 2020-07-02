@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/palette-town/static/css/main.47106605.chunk.css",
+    "main.js": "/palette-town/static/js/main.7af866cb.chunk.js",
+    "main.js.map": "/palette-town/static/js/main.7af866cb.chunk.js.map",
+    "runtime-main.js": "/palette-town/static/js/runtime-main.42fe43a0.js",
+    "runtime-main.js.map": "/palette-town/static/js/runtime-main.42fe43a0.js.map",
+    "static/css/2.0da342d8.chunk.css": "/palette-town/static/css/2.0da342d8.chunk.css",
+    "static/js/2.57ecc9f9.chunk.js": "/palette-town/static/js/2.57ecc9f9.chunk.js",
+    "static/js/2.57ecc9f9.chunk.js.map": "/palette-town/static/js/2.57ecc9f9.chunk.js.map",
+    "index.html": "/palette-town/index.html",
+    "precache-manifest.09ff339b4eed48bea5d5856d9d5a0d70.js": "/palette-town/precache-manifest.09ff339b4eed48bea5d5856d9d5a0d70.js",
+    "service-worker.js": "/palette-town/service-worker.js",
+    "static/css/2.0da342d8.chunk.css.map": "/palette-town/static/css/2.0da342d8.chunk.css.map",
+    "static/css/main.47106605.chunk.css.map": "/palette-town/static/css/main.47106605.chunk.css.map",
+    "static/js/2.57ecc9f9.chunk.js.LICENSE.txt": "/palette-town/static/js/2.57ecc9f9.chunk.js.LICENSE.txt",
+    "static/media/bg.svg": "/palette-town/static/media/bg.7319f502.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.42fe43a0.js",
+    "static/css/2.0da342d8.chunk.css",
+    "static/js/2.57ecc9f9.chunk.js",
+    "static/css/main.47106605.chunk.css",
+    "static/js/main.7af866cb.chunk.js"
+  ]
+}
