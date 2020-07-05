@@ -2,9 +2,9 @@
 
 > ##### Live Preview: https://angelo93.github.io/palette-town/
 
-### Description:
-
 ---
+
+## Description:
 
 Responsive React App for creating and managing custom color palettes.
 
@@ -57,11 +57,11 @@ Different shades of a single color swatch is shown.
 
 ![Home View](./assets/single_palette_view.png)
 
-## </details>
-
-### Tech Stack:
+</details>
 
 ---
+
+## Tech Stack:
 
 - React Framework for component creation.
 - React Router for dynamic route handling.
